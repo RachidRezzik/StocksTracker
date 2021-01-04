@@ -60,7 +60,7 @@ export default function StockStats(props) {
     }, [props.selectedStock])
     
     return (
-        <div>
+        <div className="stock_quote">
             {(newsArray === "" && quoteData === "" && logoData === "" && divData === "") ? <h2>Loading Data..</h2> : 
             <div>
             <div>

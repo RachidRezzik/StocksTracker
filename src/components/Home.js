@@ -1,6 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+
+//COMPONENTS
 import FeaturedStock from './FeaturedStock'
+import UserPositions from './UserPositions'
 
 export default function Home(props) {
     const featuredStocks = [
@@ -38,35 +40,33 @@ export default function Home(props) {
 
     return (
         <div>
-        
-        <div>
-            <Link to="/Stocks">Search Stocks!</Link>
-            <h2>Featured Stocks</h2>
-            <div className="featured_stocks_container">
-                {featuredStocks.map(stock => {
-                    return (
-                        <div className="featured_stock">
-                            <div className="featured_stock_flex"> 
-                                <div className="logo_ticker"> 
-                                    <div className="image_container">
-                                        <img src={stock.logo} alt="" />
+            <UserPositions />
+            <div>
+                <h2 className="featured_headline">Featured Stocks</h2>
+                <div className="featured_stocks_container">
+                    {featuredStocks.map(stock => {
+                        return (
+                            <div className="featured_stock">
+                                <div className="featured_stock_flex"> 
+                                    <div className="logo_ticker"> 
+                                        <div className="image_container">
+                                            <img src={stock.logo} alt="" />
+                                        </div>
+                                        <div className="stock_name_container">
+                                            <p>{stock.ticker}</p>
+                                            <h4>{stock.name}</h4>
+                                        </div>
                                     </div>
-                                    <div className="stock_name_container">
-                                        <p>{stock.ticker}</p>
-                                        <h4>{stock.name}</h4>
-                                    </div>
+                                    <FeaturedStock
+                                    stock={stock.ticker}
+                                    handleStockClick={props.handleStockClick}
+                                    />
                                 </div>
-                                <FeaturedStock
-                                stock={stock.ticker}
-                                handleStockClick={props.handleStockClick}
-                                />
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
-        
-        </div>
         </div>
     )
 }

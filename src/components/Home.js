@@ -1,30 +1,72 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import FeaturedStock from './FeaturedStock'
 
 export default function Home(props) {
-    const featured_stocks = ['IBM', 'TSLA', 'AAPL', 'V', 'MSFT']
-
-
-    const FeaturedStockClick = (stock) => {
-        console.log(stock)
-        props.handleStockClick(stock)
-    }
+    const featuredStocks = [
+        {
+            name: "AMAZON",
+            ticker: 'AMZN',
+            logo: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AMZN.png"
+        },
+        {
+            name: "IBM",
+            ticker: 'IBM',
+            logo: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/IBM.png"
+        },
+        {
+            name: "NETFLIX",
+            ticker: 'NFLX',
+            logo: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/NFLX.png"
+        },
+        {
+            name: "TESLA",
+            ticker: 'TSLA',
+            logo: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/TSLA.png"
+        },
+        {
+            name: "APPLE",
+            ticker: 'AAPL',
+            logo: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAPL.png"
+        },
+        {
+            name: "MICROSOFT",
+            ticker: 'MSFT',
+            logo: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/MSFT.png"
+        }
+    ]
 
     return (
+        <div>
+        
         <div>
             <Link to="/Stocks">Search Stocks!</Link>
             <h2>Featured Stocks</h2>
             <div className="featured_stocks_container">
-                {featured_stocks.map(stock => {
+                {featuredStocks.map(stock => {
                     return (
-                        <Link to="/StockQuote" onClick={() => FeaturedStockClick(stock)}>
-                            <div className="featured_stock">
-                                <p>{stock}</p>
+                        <div className="featured_stock">
+                            <div className="featured_stock_flex"> 
+                                <div className="logo_ticker"> 
+                                    <div className="image_container">
+                                        <img src={stock.logo} alt="" />
+                                    </div>
+                                    <div className="stock_name_container">
+                                        <p>{stock.ticker}</p>
+                                        <h4>{stock.name}</h4>
+                                    </div>
+                                </div>
+                                <FeaturedStock
+                                stock={stock.ticker}
+                                handleStockClick={props.handleStockClick}
+                                />
                             </div>
-                        </Link>
+                        </div>
                     )
                 })}
             </div>
+        
+        </div>
         </div>
     )
 }

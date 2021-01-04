@@ -2,18 +2,28 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 export default function StockStats(props) {
-    const [quoteData, setQuoteData] = useState({})
-    const [divData, setDivData] = useState({})
-    const [newsArray, setNewsArray] = useState([])
-    const [recordDateData, setRecordDateData] = useState({})
-
+    const [logoData, setLogoData] = useState("")
+    const [quoteData, setQuoteData] = useState("")
+    const [divData, setDivData] = useState("")
+    const [newsArray, setNewsArray] = useState("")
 
     //Calling API Based on Which of the Featured Stocks they Selected
 
     useEffect(() => {
+        //LOGO DATA
+        let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/logo?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        axios.get(url)
+        .then((res) => {
+            console.log(res.data.url)
+            setLogoData(res.data)
+        })
+        .catch((error) => { 
+            console.log(error)
+        })
+
         //QUOTE DATA
 
-        let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/quote?token=sk_55c776d814304653a39d9ba6b3efcd03`
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
         .then((res) => {
             setQuoteData(res.data)
@@ -22,65 +32,54 @@ export default function StockStats(props) {
             console.log(error)
         })
 
+
         //DIVIDEND DATA
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/dividends?token=sk_55c776d814304653a39d9ba6b3efcd03`
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/dividends?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
         .then((res) => {
-            setDivData(res.data[0])
+            if (res.data[0] === undefined){
+                setDivData("none")
+            } else{
+                setDivData(res.data[0])
+            }
         })
         .catch((error) => {
             console.log(error)
         })
-    }, [])
+
+        //News Articles (In English)
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{50}?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        axios.get(url)
+        .then((res) => {
+            let english_array = res.data.filter(article => article.lang === 'en').slice(0, 5)
+            setNewsArray(english_array)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, [props.selectedStock])
     
-
-    // //DIVIDEND DATA
-    // url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/dividends?token=sk_55c776d814304653a39d9ba6b3efcd03`
-    // axios.get(url).then(function (response){
-    //     setDivData(response.data[0])
-    // }).catch(function (error){
-    //     console.log(error)
-    // })
-    // console.log(divData)
-
-    // const recordDateFormatted = divData.recordDate.replace(/-/g, '')
-    // console.log(recordDateFormatted)
-
-    // //CALCULATING DIV % BASED ON CLOSING PRICE ON RECORD DATE
-    // url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/chart/date/${recordDateFormatted}?token=sk_55c776d814304653a39d9ba6b3efcd03`
-    // axios.get(url).then(function (response){
-    //     setRecordDateData(response.data)
-    // }).catch(function (error){
-    //     console.log(error)
-    // })
-    
-    // const div_percent = ((divData.amount / recordDateData.close) * 100).toFixed(2)
-
-    // //NEWS DATA (NEEDS TO BE ENGLISH ARTICLES)
-    // axios.get(`https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{50}?token=sk_55c776d814304653a39d9ba6b3efcd03`).then(function (response){
-    //     setNewsArray(response.data.filter(article => article.lang == 'en'))
-    // }).catch(function (error){
-    //     console.log(error)
-    // })
-
     return (
         <div>
-            <h2>{quoteData.latestPrice}</h2>
-            {/* <h1>{props.selectedStock}</h1>
-            <div style={{margin: "20px auto"}}>
-                <h4>Price: ${quote_data.latestPrice}</h4>
-                <h4>Change:{quote_data.changePercent}%</h4>
-                <h4>52-Week High: ${quote_data.week52High}</h4>
-                <h4>52-Week Low: ${quote_data.week52Low}</h4>
+            {(newsArray === "" && quoteData === "" && logoData === "" && divData === "") ? <h2>Loading Data..</h2> : 
+            <div>
+            <div>
+                <h1>{props.selectedStock}</h1>
+                {logoData !== {} ? <img src={logoData.url} alt=""/> : ""}
             </div>
             <div style={{margin: "20px auto"}}>
-                <h4>Last Div Payment: ${div_data.amount} ({div_percent})</h4>
-                <h4>Payment Date: {div_data.paymentDate}</h4>
-                <h4>Record Date: {div_data.recordDate}</h4>
-                <h4>Close Price on Record Date:{recordDate_data.close}</h4>
+                <h4>Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : "negative_change"}>({(quoteData.changePercent * 100).toFixed(2)}%)</span></h4>
+                <h4>52-Week High: ${(quoteData.week52High)}</h4>
+                <h4>52-Week Low: ${(quoteData.week52Low)}</h4>
+            </div>
+            <div style={{margin: "20px auto"}}>
+                <h4>Last Div Payment: {divData !== "none" ? `$${divData.amount}` : "-"}</h4>
+                <h4>Payment Date: {divData !== "none" ? divData.paymentDate : "-"}</h4>
+                <h4>Record Date: {divData !== "none" ? divData.recordDate : "-"}</h4>
             </div>
             <div className="articles_container" style={{margin: "20px auto"}}>
-                {news_array.slice(0, 5).map(article => {
+                {newsArray.length !== 0 ? 
+                    newsArray.map(article => {
                     return (
                         <div className="article">
                             <a href={article.url} >
@@ -89,8 +88,10 @@ export default function StockStats(props) {
                             </a>
                         </div>
                     ) 
-                })}
-            </div> */}
+                }) : ""}
+            </div>
+            </div>
+            }  
         </div>
     )
 }

@@ -15,20 +15,6 @@ function App() {
     setSelectedStock(stock)
   }
 
-
-  //how to convert epoch timestamp to date
-  // let utc = response.data[0].datetime
-  // let d = new Date(utc)
-  
-  // axios.request('https://cloud.iexapis.com/stable/stock/IBM/news/last/{5}?token=sk_55c776d814304653a39d9ba6b3efcd03').then(function (response) {
-  //   // let utc = response.data[0].datetime
-  //   // let d = new Date(utc)
-  //   // console.log(d)
-  // }).catch(function (error) {
-  //   console.error(error);
-  // });
-
-
   return (
     <div className="App">
       <HashRouter baseline="/">

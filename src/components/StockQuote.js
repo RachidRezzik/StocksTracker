@@ -114,7 +114,7 @@ export default function StockStats(props) {
             <div className="stock_quote">
                 <div className="quote_container">
                     <div className="name_logo">
-                        <img src={logoData.url} onerror='this.style.display = "none"'/>
+                        <img src={logoData.url}/>
                         <div>
                             <p>{props.selectedStock}</p>
                             <h2>{quoteData.companyName}</h2>
@@ -146,7 +146,7 @@ export default function StockStats(props) {
                     </div>
                     <div className="div_info">
                         <div>
-                            <h4>Last Div:</h4>
+                            <h4>Dividend:</h4>
                             <h4>{divData.amount}</h4> 
                         </div>
                         <div>

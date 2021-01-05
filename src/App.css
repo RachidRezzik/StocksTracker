@@ -293,7 +293,25 @@
 .stocks_page input{
   margin: 20px auto;
   margin-top: 10px;
-  width: 200px;
   height: 30px;
+}
+
+#stock_input{
+  margin: 20px auto;
+  margin-top: 10px;
+  width: 175px;
   text-indent: 10px;
+  outline: none;
+}
+
+#stock_submit{
+  margin: 20px auto;
+  margin-top: 10px;
+  width: 80px;
+  outline: none;
+  text-align: center;
+}
+
+#stock_error{
+  margin: 20px;
 }

@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 
-export default function FeaturedStock(props) {
+export default function FeaturedStockPrice(props) {
     const [isLoading, setLoading] = useState(true)
     const [price, setPrice] = useState(0)
     const [changePercent, setChangePercent] = useState(0)
@@ -28,8 +28,12 @@ export default function FeaturedStock(props) {
 
     if (price === 0 && isLoading) {
         return (
-            <div>
-                <p>-</p>
+            <div className="price_container">
+                    <p>-</p>
+                    <Link to="StockQuote" onClick={() => handleMoreInfo(props.stock)}>
+                        <button>Stock Details</button>
+                    </Link>
+                    <button>Add Position</button>
             </div>
         )
     } else{
@@ -45,3 +49,4 @@ export default function FeaturedStock(props) {
     }
 
 }
+

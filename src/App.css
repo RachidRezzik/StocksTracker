@@ -4,12 +4,8 @@
   box-sizing: border-box;
 }
 
-.App{
-  background: rgb(248, 246, 246);
-}
-
 .positive_change{
-  color: rgb(6, 219, 6);
+  color: rgb(4, 192, 4);
 }
 
 .negative_change{
@@ -125,12 +121,13 @@
 }
 
 .featured_stock{
-  border-bottom: 1px solid whitesmoke;
   text-decoration: none;
   padding: 10px;
   height: 125px;
   background: rgb(29, 29, 29);
   color: white;
+  margin: 7.5px auto;
+  border-radius: 2.5px;
 }
 
 .featured_stock a{
@@ -196,6 +193,107 @@
 /* ***********************STOCK QUOTE**************** */
 
 .stock_quote{
+  width: 90%;
+  margin: 10px auto;
   margin-top: 90px;
   min-height: calc(100vh - 90px);
+}
+
+.quote_container{
+  padding-top: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.quote_container img{
+  width: 80px;
+  height: 80px;
+  border-radius: 2.5px;
+  background:linear-gradient(rgb(243, 237, 237), rgb(228, 224, 224));
+  text-indent: 100vw;
+}
+
+.quote_container button{
+  margin-top: 10px;
+  padding: 7.5px;
+  background: rgb(2, 134, 24);
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 2.5px;
+  cursor: pointer;
+  font-size: 17.5px;
+}
+
+.name_logo{
+  display: flex;
+  align-items: center;
+}
+
+.name_logo div{
+  padding: 5px;
+}
+
+#price{
+  margin: 10px auto;
+  margin-top: 15px;
+  font-size: 30px;
+}
+
+.quote_data{
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 7.5px;
+}
+
+.metrics_info{
+  width: 35%;
+}
+
+.metrics_info div, .div_info div{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 2.5px 0px;
+}
+
+.div_info{
+  width: 35%;
+  text-align: left;
+}
+
+.in_the_news{
+  margin: 20px auto;
+}
+
+.article_link{
+  display: block;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid black;
+  background: rgb(53, 52, 52);
+  margin: 7.5px auto;
+  border-radius: 2.5px;
+  color: white;
+  text-decoration: none;
+}
+
+
+/* ****************SEARCH STOCKS************* */
+
+.stocks_page{
+  margin-top: 90px;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.stocks_page input{
+  margin: 20px auto;
+  margin-top: 10px;
+  width: 200px;
+  height: 30px;
+  text-indent: 10px;
 }

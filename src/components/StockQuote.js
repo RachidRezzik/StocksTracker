@@ -2,10 +2,27 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 export default function StockStats(props) {
-    const [logoData, setLogoData] = useState("")
-    const [quoteData, setQuoteData] = useState("")
-    const [divData, setDivData] = useState("")
-    const [newsArray, setNewsArray] = useState("")
+    const [logoData, setLogoData] = useState({
+        url: ""
+    })
+    const [quoteData, setQuoteData] = useState({
+        companyName: "",
+        latestPrice: "",
+        changePercent: "",
+        marketCap: "",
+        peRatio: "",
+        week52High: "",
+        week52Low: ""
+    })
+    const [divData, setDivData] = useState({
+        amount: "",
+        paymentDate: "",
+        recordDate: "",
+        frequency: ""
+    })
+    const [newsArray, setNewsArray] = useState([])
+    const [isLoading, setLoading] = useState(true)
+
 
     //Calling API Based on Which of the Featured Stocks they Selected
 
@@ -14,8 +31,9 @@ export default function StockStats(props) {
         let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/logo?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
         .then((res) => {
-            console.log(res.data.url)
-            setLogoData(res.data)
+            setLogoData({
+                url: res.data.url
+            })
         })
         .catch((error) => { 
             console.log(error)
@@ -26,7 +44,23 @@ export default function StockStats(props) {
         url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
         .then((res) => {
-            setQuoteData(res.data)
+            let marketCap = res.data.marketCap
+            if (marketCap.toString().length > 6 && marketCap.toString().length <= 9){
+                marketCap = `${Math.round(marketCap / 1000000)} M`
+            } else if (marketCap.toString().length > 10 && marketCap.toString().length <= 12){
+                marketCap = `${Math.round(marketCap / 1000000000)} B`
+            } else if (marketCap.toString().length > 12 && marketCap.toString().length <= 15){
+                marketCap = `${Math.round(marketCap / 1000000000000)} T`
+            }
+            setQuoteData({
+                companyName: res.data.companyName,
+                latestPrice: res.data.latestPrice.toFixed(2),
+                changePercent: (res.data.changePercent * 100).toFixed(2),
+                marketCap: marketCap,
+                peRatio: res.data.peRatio,
+                week52High: res.data.week52High,
+                week52Low: res.data.week52Low
+            })
         })
         .catch((error) => {
             console.log(error)
@@ -38,9 +72,19 @@ export default function StockStats(props) {
         axios.get(url)
         .then((res) => {
             if (res.data[0] === undefined){
-                setDivData("none")
+                setDivData({
+                    amount: " -",
+                    paymentDate: " -",
+                    recordDate: " -",
+                    frequency: " -"
+                })
             } else{
-                setDivData(res.data[0])
+                setDivData({
+                    amount: `$${res.data[0].amount}`,
+                    paymentDate: res.data[0].paymentDate,
+                    recordDate: res.data[0].recordDate,
+                    frequency: res.data[0].frequency
+                })
             }
         })
         .catch((error) => {
@@ -48,7 +92,7 @@ export default function StockStats(props) {
         })
 
         //News Articles (In English)
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{50}?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{100}?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
         .then((res) => {
             let english_array = res.data.filter(article => article.lang === 'en').slice(0, 5)
@@ -57,41 +101,82 @@ export default function StockStats(props) {
         .catch((error) => {
             console.log(error)
         })
+
+        setLoading(false)
     }, [props.selectedStock])
-    
-    return (
-        <div className="stock_quote">
-            {(newsArray === "" && quoteData === "" && logoData === "" && divData === "") ? <h2>Loading Data..</h2> : 
-            <div>
-            <div>
-                <h1>{props.selectedStock}</h1>
-                {logoData !== {} ? <img src={logoData.url} alt=""/> : ""}
-            </div>
-            <div style={{margin: "20px auto"}}>
-                <h4>Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : "negative_change"}>({(quoteData.changePercent * 100).toFixed(2)}%)</span></h4>
-                <h4>52-Week High: ${(quoteData.week52High)}</h4>
-                <h4>52-Week Low: ${(quoteData.week52Low)}</h4>
-            </div>
-            <div style={{margin: "20px auto"}}>
-                <h4>Last Div Payment: {divData !== "none" ? `$${divData.amount}` : "-"}</h4>
-                <h4>Payment Date: {divData !== "none" ? divData.paymentDate : "-"}</h4>
-                <h4>Record Date: {divData !== "none" ? divData.recordDate : "-"}</h4>
-            </div>
-            <div className="articles_container" style={{margin: "20px auto"}}>
-                {newsArray.length !== 0 ? 
-                    newsArray.map(article => {
-                    return (
-                        <div className="article">
-                            <a href={article.url} >
+
+    if (isLoading) {
+        return(
+            <h2>Loading Data..</h2>
+        )
+    } else{
+        return(
+            <div className="stock_quote">
+                <div className="quote_container">
+                    <div className="name_logo">
+                        <img src={logoData.url} onerror='this.style.display = "none"'/>
+                        <div>
+                            <p>{props.selectedStock}</p>
+                            <h2>{quoteData.companyName}</h2>
+                        </div>
+                    </div>
+                    <div>
+                        <button>Add Position</button>
+                    </div>
+                </div>
+                <h4 id="price">Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : "negative_change"}>({quoteData.changePercent}%)</span></h4> 
+                <div className="quote_data">
+                    <div className="metrics_info">
+                        <div>
+                            <h4>P/E Ratio:</h4>
+                            <h4>{quoteData.peRatio}</h4> 
+                        </div>
+                        <div>
+                            <h4>Market Cap:</h4>
+                            <h4>{quoteData.marketCap}</h4>  
+                        </div>
+                        <div>
+                            <h4>52-Week High:</h4>
+                            <h4>${quoteData.week52High}</h4>  
+                        </div>
+                        <div style={{border: "none"}}>
+                            <h4>52-Week Low:</h4>
+                            <h4>${quoteData.week52Low}</h4>  
+                        </div>
+                    </div>
+                    <div className="div_info">
+                        <div>
+                            <h4>Last Div:</h4>
+                            <h4>{divData.amount}</h4> 
+                        </div>
+                        <div>
+                            <h4>Payment Date:</h4>
+                            <h4>{divData.paymentDate}</h4> 
+                        </div>
+                        <div>
+                            <h4>Record Date:</h4>
+                            <h4>{divData.recordDate}</h4> 
+                        </div>
+                        <div>
+                            <h4>Frequency:</h4>
+                            <h4 style={{textTransform: "capitalize"}}>{divData.frequency}</h4> 
+                        </div>
+                        
+                    </div>
+                </div>
+                <h1 className="in_the_news">{props.selectedStock} in the News</h1>
+                <div className="articles_container">
+                    {newsArray.length !== 0 ? 
+                        newsArray.map(article => {
+                        return (
+                            <a className="article_link" href={article.url} target="_blank">
                                 <h2>{article.headline}</h2>
                                 <h3>{article.source}</h3>
                             </a>
-                        </div>
-                    ) 
-                }) : ""}
-            </div>
-            </div>
-            }  
-        </div>
-    )
+                        ) 
+                    }) : ""}
+                </div>
+            </div> 
+        )
+    }
 }

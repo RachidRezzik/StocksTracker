@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 //Images
 import logo from '../images/RR_finance.JPG'
@@ -7,12 +7,15 @@ import logo from '../images/RR_finance.JPG'
 export default function NavBar() {
     return (
         <div className="navbar">
+
             <div className="logo_container">
-                <img src={logo} alt="" />
+                <Link to="/">
+                    <img src={logo} alt="" />
+                </Link>
             </div>
             <div className="links_container">
-                <NavLink to="/">Positions</NavLink>
-                <NavLink to="/">Search Stocks</NavLink>
+                <Link to="/">Positions</Link>
+                <Link to="/Stocks">Search Stocks</Link>
             </div>
         </div>
     )

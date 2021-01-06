@@ -96,8 +96,10 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px;
   border-bottom: 1px solid black;
+  background: rgb(218, 218, 218);
 }
 
 .position_row h4{
@@ -405,6 +407,7 @@
   border-radius: 2.5px;
   color: white;
   outline-color: rgb(2, 134, 24);
+  cursor: pointer;
 }
 
 .add_position_error{

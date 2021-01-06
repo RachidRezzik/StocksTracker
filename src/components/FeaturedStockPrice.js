@@ -43,7 +43,7 @@ export default function FeaturedStockPrice(props) {
     } else{
         return (
             <div className="price_container">
-                <p>${price}(<span className={changePercent > 0 ? "positive_change" : "negative_change"}>{(changePercent * 100).toFixed(2)}%</span>)</p>
+                <p>${price.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}(<span className={changePercent > 0 ? "positive_change" : "negative_change"}>{(changePercent * 100).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}%</span>)</p>
                 <Link to="StockQuote" onClick={() => handleMoreInfo(props.stock)}>
                     <button>Stock Details</button>
                 </Link>

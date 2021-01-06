@@ -20,12 +20,24 @@ export default function AddPositionModal(props) {
         } else{
             position_error.innerHTML = "Position Successfully Added"
             position_error.style.color = 'green'
-            props.handleAddPositionSubmit(props.positionStock, numberShares.current.value, avgPrice.current.value)
+            props.handleAddPositionSubmit(props.positionStock, parseFloat(numberShares.current.value).toFixed(2), parseFloat(avgPrice.current.value).toFixed(2))
+            handleModalFieldsClear()
             setPositionSubmitted(true)
         }
     }
 
+    const handleModalFieldsClear = () => {
+        const position_error = document.querySelector(".add_position_error")
+        position_error.innerHTML = "no error"
+        position_error.style.color = 'white'
+        numberShares.current.value = ""
+        avgPrice.current.value = ""
+    }
+
     const handleModalClose = () => {
+        if (positionSubmitted === false){
+            handleModalFieldsClear()
+        }
         props.handleModalClose()
         setPositionSubmitted(false)
     }
@@ -35,7 +47,7 @@ export default function AddPositionModal(props) {
     useEffect(() => {
         let handler = (event) => {
             if (!node.current.contains(event.target) && props.positionModal) {
-                props.handleModalClose()
+                handleModalClose()
                 setPositionSubmitted(false)
             }
         }
@@ -59,15 +71,15 @@ export default function AddPositionModal(props) {
                 <form onSubmit={handlePositionSubmit}>
                     <div className="position_input_container">
                         <h4>Number of Shares:</h4>
-                        <input ref={numberShares} type="text" />
+                        <input ref={numberShares} type="number" placeholder="0.00" step=".01"/>
                     </div>
                     <div className="position_input_container">
                         <h4>Avg. Share Price ($):</h4>
-                        <input ref={avgPrice} type="text" />
+                        <input ref={avgPrice} type="number" placeholder="0.00" step=".01"/>
                     </div>
                     <input className="position_submit_button" type="submit" value="Add to Your Positions" />
                 </form>
-                <h3 className="add_position_error">dgfdg</h3>
+                <h3 className="add_position_error">no error</h3>
                 </div>
                 }              
             </div>

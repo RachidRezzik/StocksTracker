@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import Position from './Position'
 
 export default function UserPositions(props) {
-    console.log(props.userPositions)
 
 
     return (
@@ -15,7 +14,8 @@ export default function UserPositions(props) {
             <div className="positions_container">
                 <div className="position_row" id="positions_key">
                     <h4>Stock</h4>
-                    <h4>Value/Return</h4>
+                    <h4>Value</h4>
+                    <h4>Gain/Return</h4>
                     <h4>#Shares</h4>
                     <h4>Avg. Price</h4>
                 </div>

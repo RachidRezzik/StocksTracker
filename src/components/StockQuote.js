@@ -47,9 +47,9 @@ export default function StockStats(props) {
             let marketCap = res.data.marketCap
             if (marketCap.toString().length > 6 && marketCap.toString().length <= 9){
                 marketCap = `${Math.round(marketCap / 1000000)} M`
-            } else if (marketCap.toString().length > 10 && marketCap.toString().length <= 12){
+            } else if (marketCap.toString().length >= 10 && marketCap.toString().length <= 12){
                 marketCap = `${Math.round(marketCap / 1000000000)} B`
-            } else if (marketCap.toString().length > 12 && marketCap.toString().length <= 15){
+            } else if (marketCap.toString().length >= 12 && marketCap.toString().length <= 15){
                 marketCap = `${Math.round(marketCap / 1000000000000)} T`
             }
             setQuoteData({
@@ -57,9 +57,9 @@ export default function StockStats(props) {
                 latestPrice: res.data.latestPrice.toFixed(2),
                 changePercent: (res.data.changePercent * 100).toFixed(2),
                 marketCap: marketCap,
-                peRatio: res.data.peRatio,
-                week52High: res.data.week52High,
-                week52Low: res.data.week52Low
+                peRatio: res.data.peRatio.toFixed(2),
+                week52High: res.data.week52High.toFixed(2),
+                week52Low: res.data.week52Low.toFixed(2)
             })
         })
         .catch((error) => {
@@ -80,7 +80,7 @@ export default function StockStats(props) {
                 })
             } else{
                 setDivData({
-                    amount: `$${res.data[0].amount}`,
+                    amount: `$${res.data[0].amount.toFixed(2)}`,
                     paymentDate: res.data[0].paymentDate,
                     recordDate: res.data[0].recordDate,
                     frequency: res.data[0].frequency
@@ -118,7 +118,7 @@ export default function StockStats(props) {
             <div className="stock_quote">
                 <div className="quote_container">
                     <div className="name_logo">
-                        <img src={logoData.url}/>
+                        <img style={{border: "1px solid lightgray"}} src={logoData.url}/>
                         <div>
                             <p>{props.selectedStock}</p>
                             <h2>{quoteData.companyName}</h2>

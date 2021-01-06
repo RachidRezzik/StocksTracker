@@ -25,6 +25,10 @@ export default function FeaturedStockPrice(props) {
         props.handleStockClick(stock)
     }
 
+    const handleAddPosition = (stock) => {
+        props.handlePositionClick(stock)
+    }
+
 
     if (price === 0 && isLoading) {
         return (
@@ -33,7 +37,7 @@ export default function FeaturedStockPrice(props) {
                     <Link to="StockQuote" onClick={() => handleMoreInfo(props.stock)}>
                         <button>Stock Details</button>
                     </Link>
-                    <button>Add Position</button>
+                    <button onClick={() => handleAddPosition(props.stock)}>Add Position</button>
             </div>
         )
     } else{
@@ -43,7 +47,7 @@ export default function FeaturedStockPrice(props) {
                 <Link to="StockQuote" onClick={() => handleMoreInfo(props.stock)}>
                     <button>Stock Details</button>
                 </Link>
-                <button>Add Position</button>
+                <button onClick={() => handleAddPosition(props.stock)}>Add Position</button>
             </div>
         )
     }

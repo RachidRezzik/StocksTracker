@@ -7,9 +7,12 @@ import UserPositions from './UserPositions'
 export default function Home(props) {
     return (
         <div>
-            <UserPositions />
+            <UserPositions 
+            userPositions={props.userPositions}
+            />
             <FeaturedStocks 
             handleStockClick={props.handleStockClick}
+            handlePositionClick={props.handlePositionClick}
             />
         </div>
     )

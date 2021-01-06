@@ -60,6 +60,7 @@ export default function FeaturedStocks(props) {
                                     <FeaturedStockPrice
                                     stock={stock.ticker}
                                     handleStockClick={props.handleStockClick}
+                                    handlePositionClick={props.handlePositionClick}
                                     />
                                 </div>
                             </div>

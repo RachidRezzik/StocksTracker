@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useState} from 'react'
 import axios from "axios"
 
 //Components
@@ -16,7 +16,6 @@ export default function Stocks(props) {
         //Quote Data
         axios.get(url)
         .then((res) => {
-            console.log(res.data.latestPrice)
             if (res.data.latestPrice !== undefined){
                 console.log("works")
                 setStock(res.data)
@@ -42,38 +41,39 @@ export default function Stocks(props) {
     
     return (
         <div className="stocks_page">
-            <h1>Search Stocks</h1>
-            <form onSubmit={handleStockSearch}>
-                <input id="stock_input" type="text" ref={userInput} placeholder="Input Stock Ticker Symbol" />
-                <input id="stock_submit" type="submit" value="Get Quote" />
-            </form>
-            <h3>Search Results:</h3>
-            {console.log(stock)}
-            {stock !== "error" && stock !== "" ? 
-            <div className="featured_stocks_container">
-
-                <div className="featured_stock">
-                    <div className="featured_stock_flex"> 
-                        <div className="logo_ticker"> 
-                            <div className="image_container">
-                                <img src={logo} alt="" />
+            <div className="search_stocks_container">   
+                <h1>Search Stocks</h1>
+                <form onSubmit={handleStockSearch}>
+                    <input id="stock_input" type="text" ref={userInput} placeholder="Input & Submit Ticker Symbol" />
+                    <input id="stock_submit" type="submit" value="Get Quote" />
+                </form>
+                {stock !== "error" && stock !== "" ? 
+                <div className="featured_stocks_container">
+                    <div className="featured_stock">
+                        <div className="featured_stock_flex"> 
+                            <div className="logo_ticker"> 
+                                <div className="image_container">
+                                    <img src={logo} alt="" />
+                                </div>
+                                <div className="stock_name_container">
+                                    <p>{stock.symbol}</p>
+                                    <h4 style={{textTransform: "uppercase"}}>{stock.companyName}</h4>
+                                </div>
                             </div>
-                            <div className="stock_name_container">
-                                <p>{stock.symbol}</p>
-                                <h4 style={{textTransform: "uppercase"}}>{stock.companyName}</h4>
-                            </div>
+                            <FeaturedStockPrice 
+                            stock={stock.symbol}
+                            handleStockClick={props.handleStockClick}
+                            handlePositionClick={props.handlePositionClick}
+                            />
                         </div>
-                        <FeaturedStockPrice 
-                        stock={stock.symbol}
-                        handleStockClick={props.handleStockClick}
-                        />
-                    </div>
-                </div>        
+                    </div>        
+                </div>
+                : stock === "error" ? <h3 id="stock_error">Sorry, Stock Not Found..</h3> : ""
+                }
             </div>
-            : stock === "error" ? <h3 id="stock_error">Sorry, Stock Not Found</h3> : ""
-            }
             <FeaturedStocks
             handleStockClick={props.handleStockClick}
+            handlePositionClick={props.handlePositionClick}
             />
         </div>
     )

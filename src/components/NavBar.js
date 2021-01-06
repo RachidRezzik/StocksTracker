@@ -15,7 +15,7 @@ export default function NavBar() {
             </div>
             <div className="links_container">
                 <Link to="/">Positions</Link>
-                <Link to="/Stocks">Search Stocks</Link>
+                <Link to="/Stocks">Stocks</Link>
             </div>
         </div>
     )

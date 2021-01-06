@@ -105,6 +105,10 @@ export default function StockStats(props) {
         setLoading(false)
     }, [props.selectedStock])
 
+    const handleAddPosition = (stock) => {
+        props.handlePositionClick(stock)
+    }
+
     if (isLoading) {
         return(
             <h2>Loading Data..</h2>
@@ -121,7 +125,7 @@ export default function StockStats(props) {
                         </div>
                     </div>
                     <div>
-                        <button>Add Position</button>
+                        <button onClick={() => handleAddPosition(props.selectedStock)}>Add Position</button>
                     </div>
                 </div>
                 <h4 id="price">Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : "negative_change"}>({quoteData.changePercent}%)</span></h4> 
@@ -157,7 +161,7 @@ export default function StockStats(props) {
                             <h4>Record Date:</h4>
                             <h4>{divData.recordDate}</h4> 
                         </div>
-                        <div>
+                        <div style={{border: "none"}}>
                             <h4>Frequency:</h4>
                             <h4 style={{textTransform: "capitalize"}}>{divData.frequency}</h4> 
                         </div>

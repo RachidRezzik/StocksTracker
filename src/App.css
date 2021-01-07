@@ -336,6 +336,7 @@
   outline: none;
   border-radius: 0px 2.5px 2.5px 0px;
   color: white;
+  cursor: pointer;
 }
 
 #stock_error{

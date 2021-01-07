@@ -10,7 +10,9 @@ export default function Stocks(props) {
     const [stock, setStock] = useState("")
     const [logo, setLogo] = useState("")
     
-    const handleStockSearch = () => {
+    const handleStockSearch = (event) => {
+        event.preventDefault()
+
         let url = `https://cloud.iexapis.com/stable/stock/${userInput.current.value.toUpperCase()}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         
         //Quote Data
@@ -33,8 +35,7 @@ export default function Stocks(props) {
         })
         .catch((error) => { 
             console.log(error)
-        })
-        
+        }) 
     }
 
     

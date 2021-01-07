@@ -5,7 +5,7 @@ import Position from './Position'
 export default function UserPositions(props) {
 
     return (
-        <div>
+        <div className="positionSection">
             <div className="positions_headline">
                 <h1>Your Positions</h1>
                 <Link to="/Stocks">Search Stocks</Link>
@@ -32,6 +32,7 @@ export default function UserPositions(props) {
                         numberShares={position.numberShares}
                         avgPrice={position.avgPrice}
                         handlePositionClick={props.handlePositionClick}
+                        handleStockClick={props.handleStockClick}
                         handleRemovePosition={props.handleRemovePosition}
                         userPositions={props.userPositions}
                         />

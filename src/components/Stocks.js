@@ -44,7 +44,7 @@ export default function Stocks(props) {
             <div className="search_stocks_container">   
                 <h1>Search Stocks</h1>
                 <form onSubmit={handleStockSearch}>
-                    <input id="stock_input" type="text" ref={userInput} placeholder="Input & Submit Ticker Symbol" />
+                    <input id="stock_input" type="text" ref={userInput} placeholder="Input Ticker Symbol" />
                     <input id="stock_submit" type="submit" value="Get Quote" />
                 </form>
                 {stock !== "error" && stock !== "" ? 

@@ -4,12 +4,18 @@ import axios from 'axios'
 //Images
 import edit from '../images/edit-icon.svg'
 import trash from '../images/trash.svg'
+import quote from '../images/view-details.svg'
+import { Link } from 'react-router-dom'
 
 export default function Position(props) {
     const [isLoading, setLoading] = useState(true)
     const [value, setValue] = useState("")
     const [positionGain, setPositionGain] = useState("")
     const [positionReturn, setPositionReturn] = useState("")
+
+    const handleMoreInfo = (stock) => {
+        props.handleStockClick(stock)
+    }
 
     const handleEditClick = (stock) => {
         props.handlePositionClick(stock)
@@ -58,6 +64,9 @@ export default function Position(props) {
                 <h4>{props.numberShares.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}</h4>
                 <h4>${props.avgPrice.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}</h4>
                 <h4>
+                    <Link to="/StockQuote" onClick={() => handleMoreInfo(props.stock)}>
+                        <img src={quote} alt="" />
+                    </Link>
                     <img src={edit} alt="" onClick={() => handleEditClick(props.stock)}/>
                     <img src={trash} alt="" onClick={() => handleDeleteClick(props.stock)}/>
                 </h4>

@@ -1,4 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 
 //Images
 import x_mark from '../images/white_x_mark.png'
@@ -44,7 +45,18 @@ export default function AddPositionModal(props) {
 
     const node = useRef()
 
+    const [currentPosition, setCurrentPosition] = useState(false)
+
     useEffect(() => {
+        let user_positions = props.userPositions
+        if (user_positions.length === 0){
+            setCurrentPosition(false)
+        } else if (user_positions.find(position => position.stock === props.positionStock)){
+            setCurrentPosition(true)
+        } else{
+            setCurrentPosition(false)
+        }
+
         let handler = (event) => {
             if (!node.current.contains(event.target) && props.positionModal) {
                 handleModalClose()
@@ -56,7 +68,7 @@ export default function AddPositionModal(props) {
         return () => {
             document.removeEventListener('mousedown', handler)
         }
-    });
+    }, [props.userPositions, handleModalClose, props.positionModal, props.positionStock]);
 
 
     return (
@@ -64,7 +76,10 @@ export default function AddPositionModal(props) {
             <img className={props.positionModal ? "exit_modal active" : "exit_modal"} src={x_mark} onClick={handleModalClose} alt=""/>
             <div ref={node} className="add_position_container">
                 {positionSubmitted ? 
-                <h2 id="position_submitted">Position Submitted ✔️</h2>
+                <div>
+                    <h2 id="position_submitted">Updated ✔️</h2>
+                    <Link to="/" id="view_positions" onClick={handleModalClose}>View Positions</Link>
+                </div>
                 :
                 <div> 
                 <h1 className="enter_position_headline">Enter Your Current Position for {props.positionStock}</h1>
@@ -77,7 +92,7 @@ export default function AddPositionModal(props) {
                         <h4>Avg. Share Price ($):</h4>
                         <input ref={avgPrice} type="number" placeholder="0.00" step=".01"/>
                     </div>
-                    <input className="position_submit_button" type="submit" value="Add to Your Positions" />
+                    <input className="position_submit_button" type="submit" value={currentPosition ? "Edit Your Position" : "Add to Your Positions"} />
                 </form>
                 <h3 className="add_position_error">no error</h3>
                 </div>

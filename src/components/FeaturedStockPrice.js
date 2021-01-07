@@ -7,8 +7,16 @@ export default function FeaturedStockPrice(props) {
     const [isLoading, setLoading] = useState(true)
     const [price, setPrice] = useState(0)
     const [changePercent, setChangePercent] = useState(0)
+    const [currentPosition, setCurrentPosition] = useState(false)
 
     useEffect(() => {
+        let user_positions = props.userPositions
+        if (user_positions.length === 0){
+            setCurrentPosition(false)
+        } else if (user_positions.find(position => position.stock === props.stock)){
+            setCurrentPosition(true)
+        }
+
         let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
         .then((res) => {
@@ -19,7 +27,7 @@ export default function FeaturedStockPrice(props) {
         .catch((error) => {
             console.log(error)
         })
-    }, [props.stock]);
+    }, [props.stock, props.userPositions]);
 
     const handleMoreInfo = (stock) => {
         props.handleStockClick(stock)
@@ -29,6 +37,7 @@ export default function FeaturedStockPrice(props) {
         props.handlePositionClick(stock)
     }
 
+    
 
     if (price === 0 && isLoading) {
         return (
@@ -37,7 +46,7 @@ export default function FeaturedStockPrice(props) {
                     <Link to="StockQuote" onClick={() => handleMoreInfo(props.stock)}>
                         <button>Stock Details</button>
                     </Link>
-                    <button onClick={() => handleAddPosition(props.stock)}>Add Position</button>
+                    <button onClick={() => handleAddPosition(props.stock)}>{currentPosition ? "Edit Position" : "Add Position"}</button>
             </div>
         )
     } else{
@@ -47,7 +56,7 @@ export default function FeaturedStockPrice(props) {
                 <Link to="StockQuote" onClick={() => handleMoreInfo(props.stock)}>
                     <button>Stock Details</button>
                 </Link>
-                <button onClick={() => handleAddPosition(props.stock)}>Add Position</button>
+                <button onClick={() => handleAddPosition(props.stock)}>{currentPosition ? "Edit Position" : "Add Position"}</button>
             </div>
         )
     }

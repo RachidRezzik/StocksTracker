@@ -4,7 +4,6 @@ import Position from './Position'
 
 export default function UserPositions(props) {
 
-
     return (
         <div>
             <div className="positions_headline">
@@ -18,6 +17,7 @@ export default function UserPositions(props) {
                     <h4>Gain/Return</h4>
                     <h4>#Shares</h4>
                     <h4>Avg. Price</h4>
+                    <h4>Options</h4>
                 </div>
                 {props.userPositions.length === 0 ? 
                 <div className="position_row">
@@ -27,9 +27,13 @@ export default function UserPositions(props) {
                 props.userPositions.map(position => {
                     return(
                         <Position
+                        key={position.key}
                         stock={position.stock}
                         numberShares={position.numberShares}
                         avgPrice={position.avgPrice}
+                        handlePositionClick={props.handlePositionClick}
+                        handleRemovePosition={props.handleRemovePosition}
+                        userPositions={props.userPositions}
                         />
                     )
                 })

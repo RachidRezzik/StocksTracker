@@ -9,10 +9,13 @@ export default function Home(props) {
         <div>
             <UserPositions 
             userPositions={props.userPositions}
+            handlePositionClick={props.handlePositionClick}
+            handleRemovePosition={props.handleRemovePosition}
             />
             <FeaturedStocks 
             handleStockClick={props.handleStockClick}
             handlePositionClick={props.handlePositionClick}
+            userPositions={props.userPositions}
             />
         </div>
     )

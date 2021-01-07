@@ -107,6 +107,13 @@
   text-align: center;
 }
 
+.position_row img{
+  width: 15px;
+  height: 15px;
+  margin: 2.5px;
+  cursor: pointer;
+}
+
 
 
 
@@ -418,6 +425,21 @@
 
 #position_submitted{
   color: rgb(5, 179, 5);
-  margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
+}
+
+#view_positions{
+  display: inline-block;
+  margin: 10px auto;
+  margin-bottom: 20px;
+  text-align: center;
+  background: rgb(2, 134, 24);
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  color: white;
+  outline-color: rgb(2, 134, 24);
+  cursor: pointer;
+  text-decoration: none;
 }

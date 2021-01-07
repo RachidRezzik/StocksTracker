@@ -17,7 +17,6 @@ export default function Stocks(props) {
         axios.get(url)
         .then((res) => {
             if (res.data.latestPrice !== undefined){
-                console.log("works")
                 setStock(res.data)
             } 
         })
@@ -60,7 +59,8 @@ export default function Stocks(props) {
                                     <h4 style={{textTransform: "uppercase"}}>{stock.companyName}</h4>
                                 </div>
                             </div>
-                            <FeaturedStockPrice 
+                            <FeaturedStockPrice
+                            userPositions={props.userPositions} 
                             stock={stock.symbol}
                             handleStockClick={props.handleStockClick}
                             handlePositionClick={props.handlePositionClick}
@@ -74,6 +74,7 @@ export default function Stocks(props) {
             <FeaturedStocks
             handleStockClick={props.handleStockClick}
             handlePositionClick={props.handlePositionClick}
+            userPositions={props.userPositions}
             />
         </div>
     )

@@ -1,11 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
+//Images
+import edit from '../images/edit-icon.svg'
+import trash from '../images/trash.svg'
+
 export default function Position(props) {
     const [isLoading, setLoading] = useState(true)
-    const [value, setValue] = useState(0)
-    const [positionGain, setPositionGain] = useState(0)
-    const [positionReturn, setPositionReturn] = useState(0)
+    const [value, setValue] = useState("")
+    const [positionGain, setPositionGain] = useState("")
+    const [positionReturn, setPositionReturn] = useState("")
+
+    const handleEditClick = (stock) => {
+        props.handlePositionClick(stock)
+    }
+
+    const handleDeleteClick = (stock) => {
+        props.handleRemovePosition(stock)
+    }
+
 
     //Calculating Position Value and Return Based on User's Number of Shares and Average Share Price
 
@@ -26,7 +39,7 @@ export default function Position(props) {
         setLoading(false)
     }, [props.stock, props.avgPrice, props.numberShares]);
 
-    if (isLoading) {
+    if (isLoading || positionReturn === "") {
         return(
             <div className="position_row">
             <h4>{props.stock}</h4>
@@ -41,9 +54,13 @@ export default function Position(props) {
             <div className="position_row">
                 <h4>{props.stock}</h4>
                 <h4>${value}</h4>
-                <h4 className={positionReturn > 0 ? "positive_change" : "negative_change"}>{positionReturn > 0 ? `$${positionGain}` : `-$${positionGain.toString().slice(1)}`} ({positionReturn > 0 ? `${positionReturn}` : `${positionReturn.toString().slice(1)}`}%)</h4>
+                <h4 className={positionGain[0] !== "-" ? "positive_change" : "negative_change"}>{positionGain[0] !== "-" ? `$${positionGain}` : `-$${positionGain.toString().slice(1)}`} ({positionGain[0] !== "-" ? `${positionReturn}` : `${positionReturn.toString().slice(1)}`}%)</h4>
                 <h4>{props.numberShares.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}</h4>
                 <h4>${props.avgPrice.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}</h4>
+                <h4>
+                    <img src={edit} alt="" onClick={() => handleEditClick(props.stock)}/>
+                    <img src={trash} alt="" onClick={() => handleDeleteClick(props.stock)}/>
+                </h4>
             </div>
         )
     }

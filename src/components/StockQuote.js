@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-export default function StockStats(props) {
+export default function StockQuote(props) {
     const [logoData, setLogoData] = useState({
         url: ""
     })
@@ -24,9 +24,21 @@ export default function StockStats(props) {
     const [isLoading, setLoading] = useState(true)
 
 
-    //Calling API Based on Which of the Featured Stocks they Selected
-
+    
+    const [currentPosition, setCurrentPosition] = useState(false)
+    
     useEffect(() => {
+        let user_positions = props.userPositions
+        if (user_positions.length === 0){
+            setCurrentPosition(false)
+        } else if (user_positions.find(position => position.stock === props.selectedStock)){
+            setCurrentPosition(true)
+        } else{
+            setCurrentPosition(false)
+        }
+        
+        //Calling API Based on Which of the Featured Stocks they Selected
+
         //LOGO DATA
         let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/logo?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
         axios.get(url)
@@ -103,7 +115,7 @@ export default function StockStats(props) {
         })
 
         setLoading(false)
-    }, [props.selectedStock])
+    }, [props.selectedStock, props.userPositions])
 
     const handleAddPosition = (stock) => {
         props.handlePositionClick(stock)
@@ -118,14 +130,14 @@ export default function StockStats(props) {
             <div className="stock_quote">
                 <div className="quote_container">
                     <div className="name_logo">
-                        <img style={{border: "1px solid lightgray"}} src={logoData.url}/>
+                        <img style={{border: "1px solid lightgray"}} src={logoData.url} alt=""/>
                         <div>
                             <p>{props.selectedStock}</p>
                             <h2>{quoteData.companyName}</h2>
                         </div>
                     </div>
                     <div>
-                        <button onClick={() => handleAddPosition(props.selectedStock)}>Add Position</button>
+                        <button onClick={() => handleAddPosition(props.selectedStock)}>{currentPosition ? "Edit Position" : "Add Position"}</button>
                     </div>
                 </div>
                 <h4 id="price">Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : "negative_change"}>({quoteData.changePercent}%)</span></h4> 
@@ -173,7 +185,7 @@ export default function StockStats(props) {
                     {newsArray.length !== 0 ? 
                         newsArray.map(article => {
                         return (
-                            <a className="article_link" href={article.url} target="_blank">
+                            <a className="article_link" href={article.url} key={article.url} target="_blank" rel="noreferrer">
                                 <h2>{article.headline}</h2>
                                 <h3>{article.source}</h3>
                             </a>

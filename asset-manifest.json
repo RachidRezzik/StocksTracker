@@ -1,26 +1,27 @@
 {
   "files": {
-    "main.css": "/StocksTracker/static/css/main.ddc9a675.chunk.css",
-    "main.js": "/StocksTracker/static/js/main.7e2cfc93.chunk.js",
-    "main.js.map": "/StocksTracker/static/js/main.7e2cfc93.chunk.js.map",
+    "main.css": "/StocksTracker/static/css/main.4cd3be2b.chunk.css",
+    "main.js": "/StocksTracker/static/js/main.cabd741e.chunk.js",
+    "main.js.map": "/StocksTracker/static/js/main.cabd741e.chunk.js.map",
     "runtime-main.js": "/StocksTracker/static/js/runtime-main.0be18cb3.js",
     "runtime-main.js.map": "/StocksTracker/static/js/runtime-main.0be18cb3.js.map",
-    "static/js/2.d5825836.chunk.js": "/StocksTracker/static/js/2.d5825836.chunk.js",
-    "static/js/2.d5825836.chunk.js.map": "/StocksTracker/static/js/2.d5825836.chunk.js.map",
+    "static/js/2.d34c84ce.chunk.js": "/StocksTracker/static/js/2.d34c84ce.chunk.js",
+    "static/js/2.d34c84ce.chunk.js.map": "/StocksTracker/static/js/2.d34c84ce.chunk.js.map",
     "static/js/3.1cf5c609.chunk.js": "/StocksTracker/static/js/3.1cf5c609.chunk.js",
     "static/js/3.1cf5c609.chunk.js.map": "/StocksTracker/static/js/3.1cf5c609.chunk.js.map",
     "index.html": "/StocksTracker/index.html",
-    "static/css/main.ddc9a675.chunk.css.map": "/StocksTracker/static/css/main.ddc9a675.chunk.css.map",
-    "static/js/2.d5825836.chunk.js.LICENSE.txt": "/StocksTracker/static/js/2.d5825836.chunk.js.LICENSE.txt",
+    "static/css/main.4cd3be2b.chunk.css.map": "/StocksTracker/static/css/main.4cd3be2b.chunk.css.map",
+    "static/js/2.d34c84ce.chunk.js.LICENSE.txt": "/StocksTracker/static/js/2.d34c84ce.chunk.js.LICENSE.txt",
     "static/media/RR_finance.54a96920.JPG": "/StocksTracker/static/media/RR_finance.54a96920.JPG",
     "static/media/edit-icon.9ea85f15.svg": "/StocksTracker/static/media/edit-icon.9ea85f15.svg",
     "static/media/trash.76e37d09.svg": "/StocksTracker/static/media/trash.76e37d09.svg",
+    "static/media/view-details.9c6ce9b2.svg": "/StocksTracker/static/media/view-details.9c6ce9b2.svg",
     "static/media/white_x_mark.24f16f08.png": "/StocksTracker/static/media/white_x_mark.24f16f08.png"
   },
   "entrypoints": [
     "static/js/runtime-main.0be18cb3.js",
-    "static/js/2.d5825836.chunk.js",
-    "static/css/main.ddc9a675.chunk.css",
-    "static/js/main.7e2cfc93.chunk.js"
+    "static/js/2.d34c84ce.chunk.js",
+    "static/css/main.4cd3be2b.chunk.css",
+    "static/js/main.cabd741e.chunk.js"
   ]
 }

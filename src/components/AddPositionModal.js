@@ -43,6 +43,14 @@ export default function AddPositionModal(props) {
         setPositionSubmitted(false)
     }
 
+    const handleViewPositions = () => {
+        window.scrollTo({
+            top: 0
+        })
+        props.handleModalClose()
+        setPositionSubmitted(false)
+    }
+
     const node = useRef()
 
     const [currentPosition, setCurrentPosition] = useState(false)
@@ -78,11 +86,12 @@ export default function AddPositionModal(props) {
                 {positionSubmitted ? 
                 <div>
                     <h2 id="position_submitted">Updated ✔️</h2>
-                    <Link to="/" id="view_positions" onClick={handleModalClose}>View Positions</Link>
+                    <Link to="/" id="view_positions" onClick={handleViewPositions}>View Positions</Link>
+                    <button id="close_button" onClick={handleModalClose}>Close</button>
                 </div>
                 :
                 <div> 
-                <h1 className="enter_position_headline">Enter Your Current Position for {props.positionStock}</h1>
+                <h1 className="enter_position_headline">{props.positionStock}</h1>
                 <form onSubmit={handlePositionSubmit}>
                     <div className="position_input_container">
                         <h4>Number of Shares:</h4>
@@ -92,7 +101,7 @@ export default function AddPositionModal(props) {
                         <h4>Avg. Share Price ($):</h4>
                         <input ref={avgPrice} type="number" placeholder="0.00" step=".01"/>
                     </div>
-                    <input className="position_submit_button" type="submit" value={currentPosition ? "Edit Your Position" : "Add to Your Positions"} />
+                    <input className="position_submit_button" type="submit" value={currentPosition ? "Edit Position" : "Add Position"} />
                 </form>
                 <h3 className="add_position_error">no error</h3>
                 </div>

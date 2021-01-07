@@ -15,6 +15,8 @@ export default function FeaturedStockPrice(props) {
             setCurrentPosition(false)
         } else if (user_positions.find(position => position.stock === props.stock)){
             setCurrentPosition(true)
+        } else{
+            setCurrentPosition(false)
         }
 
         let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`

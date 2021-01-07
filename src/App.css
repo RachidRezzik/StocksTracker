@@ -428,15 +428,15 @@
   margin-bottom: 10px;
 }
 
-#view_positions{
+#view_positions, #close_button{
   display: inline-block;
-  margin: 10px auto;
+  margin: 10px 5px;
   margin-bottom: 20px;
   text-align: center;
   background: rgb(2, 134, 24);
   border: none;
   padding: 10px;
-  font-size: 20px;
+  font-size: 17.5px;
   border-radius: 5px;
   color: white;
   outline-color: rgb(2, 134, 24);

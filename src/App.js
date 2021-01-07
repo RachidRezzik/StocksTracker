@@ -14,11 +14,12 @@ function App() {
   const [positionStock, setPositionStock] = useState("")
   const [positionModal, setPositionModal] = useState(false)
   
-
+  // Selected Stock for Stock Quote Page
   const handleStockClick = (stock) => {
     setSelectedStock(stock)
   }
 
+  // Selected Stock for Add/Edit Position Modal
   const handlePositionClick = (stock) => {
     setPositionModal(true)
     setPositionStock(stock)
@@ -46,7 +47,7 @@ function App() {
 
   const [userPositions, setUserPositions] = useState(readUserPositionsStorage() != null ? readUserPositionsStorage() : [])
 
-  //Handling an Addition to The User's Positions
+  //Handling an Addition/Edit/Removal of The User's Positions
 
   const handleEditPosition = (positions, stockObject) => {
     let new_positions = positions.filter(position => position.stock !== stockObject.stock)

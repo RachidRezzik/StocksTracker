@@ -2,6 +2,11 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.App{
+  background: whitesmoke;
 }
 
 .positive_change{
@@ -22,10 +27,11 @@
   align-items: center;
   justify-content: space-between;
   background: white;
+  background: black;
+  color: white;
   width: 100%;
   height: 90px;
   padding: 30px 2.5%;
-  box-shadow: 0px 2px 8px rgba(119, 119, 119, 0.466);
 }
 
 .logo_container{
@@ -49,32 +55,87 @@
   text-decoration: none;
   margin-left: 7.5vw;
   text-transform: uppercase;
-  color: black;
   font-size: 17.5px;
+  color: white;
+}
+
+
+/* ******************SEARCH************** */
+
+/* .search_container{
+  display: none;
+} */
+
+.search_container{
+  position: fixed;
+  top: 90px;
+  left: 0px;
+  background: grey;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.445);
+  padding: 20px;
+}
+
+
+#stock_input{
+  margin: 20px auto;
+  margin-top: 10px;
+  width: 170px;
+  text-indent: 10px;
+  outline: none;
+  border-radius: 2.5px 0px 0px 2.5px;
+  height: 40px;
+  border: none;
+}
+
+#stock_submit{
+  margin: 20px auto;
+  margin-top: 10px;
+  width: 80px;
+  outline: none;
+  text-align: center;
+  background: rgb(4, 115, 219);
+  border: none;
+  outline: none;
+  border-radius: 0px 2.5px 2.5px 0px;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+}
+
+#searched_stock{
+  width: 99%;
+  max-width: 500px;
+}
+
+#stock_error{
+  margin: 0px;
 }
 
 
 /* //////////////////////HOME//////////////// */
 
 .home_container{
-  margin-top: 100px;
-  /* border: 1px solid black; */
+  margin-top: 90px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px 2.5%;
+  padding-top: 20px;
 }
 
 .home_left{
   width: 100%;
-  /* border: 2px solid red; */
   min-width: 500px;
 }
 
 .home_right{
   min-width: 310px;
   width: 100%;
-  /* border: 2px solid blue; */
   display: flex;
   justify-content: flex-start;
 }
@@ -109,7 +170,7 @@
 .positions_headline a{
   margin-top: 10px;
   padding: 7.5px;
-  background: rgb(2, 134, 24);
+  background:rgb(4, 115, 219);
   color: white;
   outline: none;
   border: none;
@@ -123,13 +184,12 @@
 .positions_container{
   width: 100%;
   margin: 10px 0px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
 }
 
 #positions_key{
   background: rgb(29, 29, 29);
   color: white;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .position_row{
@@ -158,7 +218,9 @@
 
 .news{
   display: flex;
-  border: 1px solid black;
+  box-shadow: 0px 2px 8px rgba(119, 136, 153, 0.322);
+  border-radius: 5px;
+  background: white;
 }
 
 .news a{
@@ -173,12 +235,15 @@
 .featuredSection img{
   width: 100%;
   height: 200px;
+  border-radius: 5px 0px 5px 0px;
+  background: lightgrey;
 }
 
 .headline_info{
-  background: white;
   padding: 5px;
+  padding-left: 10px;
   margin: 10px 0px;
+  height: 150px;
 }
 
 .featuredSection a h2{
@@ -189,6 +254,7 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  color:rgb(4, 115, 219);
 }
 
 .other_articles{
@@ -198,17 +264,24 @@
 
 .home_article{
   display: block;
-  margin: 5px 0px;
-  padding: 7.5px;
+  margin: 16px 0px;
+  padding: 2.5px 15px;
+  padding-right: 5px;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .home_article h2{
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-transform: capitalize;
-  font-size: 17.5px;
+  font-size: 17px;
+  color:rgb(4, 115, 219);
+
 }
 
 
@@ -221,7 +294,7 @@
 /* ***************FEATURED STOCKS****************** */
 
 .featured_headline{
-  margin: 5px 0px;
+  margin: 6.5px 0px;
   text-align: left;
   height: 50px;
   display: flex;
@@ -306,7 +379,7 @@
 .price_container button{
   margin-top: 10px;
   padding: 7.5px;
-  background: rgb(2, 134, 24);
+  background:rgb(4, 115, 219);
   color: white;
   outline: none;
   border: none;
@@ -343,7 +416,7 @@
 .quote_container button{
   margin-top: 10px;
   padding: 7.5px;
-  background: rgb(2, 134, 24);
+  background:rgb(4, 115, 219);
   color: white;
   outline: none;
   border: none;
@@ -408,54 +481,6 @@
 }
 
 
-/* ****************SEARCH STOCKS************* */
-
-.stocks_page{
-  margin-top: 90px;
-  padding-top: 50px;
-  text-align: center;
-}
-
-.search_stocks_container{
-  padding: 10px;
-  margin-bottom: 40px;
-}
-
-.stocks_page input{
-  margin: 20px auto;
-  margin-top: 10px;
-  height: 30px;
-}
-
-#stock_input{
-  margin: 20px auto;
-  margin-top: 10px;
-  width: 190px;
-  text-indent: 5px;
-  outline: none;
-  border-radius: 2.5px 0px 0px 2.5px;
-
-}
-
-#stock_submit{
-  margin: 20px auto;
-  margin-top: 10px;
-  width: 80px;
-  outline: none;
-  text-align: center;
-  background:  rgb(2, 134, 24);
-  border: none;
-  outline: none;
-  border-radius: 0px 2.5px 2.5px 0px;
-  color: white;
-  cursor: pointer;
-}
-
-#stock_error{
-  margin: 10px;
-}
-
-
 /* ***************ADD POSITION MODAL*********** */
 
 .add_position_modal{
@@ -512,7 +537,7 @@
 
 .position_input_container input{
   text-indent: 10px;
-  outline-color: rgb(2, 134, 24);
+  outline-color:rgb(4, 115, 219);
 }
 
 .position_submit_button{
@@ -520,13 +545,13 @@
   margin: 30px auto;
   margin-bottom: 10px;
   text-align: center;
-  background: rgb(2, 134, 24);
+  background:rgb(4, 115, 219);
   border: none;
   padding: 10px;
   font-size: 20px;
   border-radius: 2.5px;
   color: white;
-  outline-color: rgb(2, 134, 24);
+  outline-color:rgb(4, 115, 219);
   cursor: pointer;
 }
 
@@ -546,13 +571,13 @@
   margin: 10px 5px;
   margin-bottom: 20px;
   text-align: center;
-  background: rgb(2, 134, 24);
+  background:rgb(4, 115, 219);
   border: none;
   padding: 10px;
   font-size: 17.5px;
   border-radius: 5px;
   color: white;
-  outline-color: rgb(2, 134, 24);
+  outline-color:rgb(4, 115, 219);
   cursor: pointer;
   text-decoration: none;
 }

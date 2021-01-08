@@ -4,10 +4,10 @@ import {HashRouter, Switch, Route} from "react-router-dom"
 
 //Components
 import Home from './components/Home'
-import Stocks from './components/Stocks'
 import StockQuote from './components/StockQuote'
 import NavBar from './components/NavBar';
 import AddPositionModal from './components/AddPositionModal';
+import SearchStocks from './components/SearchStocks';
 
 function App() {
   const [selectedStock, setSelectedStock] = useState("")
@@ -85,22 +85,38 @@ function App() {
 
   ///////////////////////////////////////////////////
 
+  //Handling User Stock Search 
+  
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  const handleSearchOpen = () => {
+    setSearchOpen(true)
+  }
+
+  const handleSearchClose = () => {
+    setSearchOpen(false)
+  }
 
   return (
     <div className="App">
       <HashRouter baseline="/">
-        <NavBar />
+        <NavBar 
+        handleSearchOpen={handleSearchOpen}
+        handleSearchClose={handleSearchClose}
+        />
+        <SearchStocks 
+        userPositions={userPositions}
+        searchOpen={searchOpen}
+        handleSearchClose={handleSearchClose}
+        handleStockClick={handleStockClick}  
+        handlePositionClick={handlePositionClick}
+        />
         <Switch>
           <Route exact path="/" render={() => <Home
           handleStockClick={handleStockClick}  
           handlePositionClick={handlePositionClick}
           handleRemovePosition={handleRemovePosition}
           userPositions={userPositions}  
-          />} />
-          <Route exact path="/Stocks" render={() => <Stocks
-          userPositions={userPositions}
-          handleStockClick={handleStockClick} 
-          handlePositionClick={handlePositionClick}   
           />} />
           <Route path="/StockQuote" render={() => <StockQuote
           selectedStock={selectedStock} 

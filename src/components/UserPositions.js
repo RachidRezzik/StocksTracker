@@ -1,14 +1,29 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import Position from './Position'
 
 export default function UserPositions(props) {
 
+    useEffect(() => {
+        const allPositions = Array.from(document.querySelectorAll('.position_row'))
+        allPositions.forEach(position => {
+            if (allPositions.indexOf(position) !== allPositions.length -1 && allPositions.indexOf(position) !== 0){
+                position.style.borderRadius = "0px"
+                position.style.borderBottom = "1px solid black"
+            } else if(allPositions.indexOf(position) === 0){
+                position.style.borderRadius = "5px 5px 0px 0px"
+                position.style.borderBottom = "none"
+            } else{
+                position.style.borderRadius = "0px 0px 5px 5px"
+                position.style.borderBottom = "none"
+            }
+        })   
+    },)
+
     return (
         <div className="positionSection">
             <div className="positions_headline">
                 <h1>Your Positions</h1>
-                <Link to="/Stocks">Search Stocks</Link>
             </div>
             <div className="positions_container">
                 <div className="position_row" id="positions_key">

@@ -56,7 +56,7 @@ export default function Home(props) {
                 />
                 <h1>News</h1>
                 <News
-                featuredStocks={featuredStocks}
+                featuredStocks={featuredStocks.filter(stock => stock.ticker !== "IBM")}
                 />
             </div>
             <div className="home_right">

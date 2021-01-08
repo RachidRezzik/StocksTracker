@@ -7,7 +7,6 @@ import logo from '../images/RR_finance.JPG'
 export default function NavBar() {
     return (
         <div className="navbar">
-
             <div className="logo_container">
                 <Link to="/">
                     <img src={logo} alt="" />
@@ -15,7 +14,7 @@ export default function NavBar() {
             </div>
             <div className="links_container">
                 <Link to="/">Positions</Link>
-                <Link to="/Stocks">Stocks</Link>
+                <Link to="/Stocks">Search Stocks 🔍</Link>
             </div>
         </div>
     )

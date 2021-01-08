@@ -5,7 +5,6 @@ import FeaturedStockPrice from './FeaturedStockPrice'
 
 
 export default function FeaturedStocks(props) {
-    
     return(
         <div>
                 <h2 className="featured_headline">Featured Stocks</h2>

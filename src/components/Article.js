@@ -28,7 +28,6 @@ export default function Article(props) {
     } else if (!isLoading){
         return (
             <div>
-            {console.log(featuredArticle)}
                 {props.featured ? 
                 <a href={featuredArticle.url} >
                     <img className="featured_image" src={featuredArticle.image} alt="" />

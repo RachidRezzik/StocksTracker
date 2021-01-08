@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from "axios"
 
 //Components
@@ -13,7 +13,7 @@ export default function SearchStocks(props) {
     const handleStockSearch = (event) => {
         event.preventDefault()
 
-        let url = `https://cloud.iexapis.com/stable/stock/${userInput.current.value.toUpperCase()}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        let url = `https://cloud.iexapis.com/stable/stock/${userInput.current.value.toUpperCase()}/quote?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         
         //Quote Data
         axios.get(url)
@@ -28,7 +28,7 @@ export default function SearchStocks(props) {
         })
 
         //LOGO DATA
-        url = `https://cloud.iexapis.com/stable/stock/${userInput.current.value.toUpperCase()}/logo?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        url = `https://cloud.iexapis.com/stable/stock/${userInput.current.value.toUpperCase()}/logo?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             setLogo(res.data.url)
@@ -38,14 +38,27 @@ export default function SearchStocks(props) {
         }) 
     }
 
+    useEffect(() => {
+        let handler = (event) => {
+            if (!node.current.contains(event.target) && event.target.id !== "search_stocks_icon") {
+                props.handleSearchClose()
+            }
+        }
+        document.addEventListener('mousedown', handler)
+
+        return () => {
+            document.removeEventListener('mousedown', handler)
+        }
+    }, [props.handleSearchClose])
+
+    const node = React.useRef()
 
     return (
-        <div className={props.searchOpen ? "search_container active" : "search_container"}>    
+        <div ref={node} className={props.searchOpen ? "search_container active" : "search_container"}>    
             <form onSubmit={handleStockSearch}>
-                <input id="stock_input" type="text" autocomplete="off" ref={userInput} placeholder="Input Ticker Symbol" />
+                <input id="stock_input" type="text" autoComplete="off" ref={userInput} placeholder="Input Ticker Symbol" />
                 <input id="stock_submit" type="submit" value="Get Quote" />
             </form>
-            {console.log(stock, notFound)}
             {stock !== "" ? 
                 <div className="featured_stock" id="searched_stock">
                     <div className="featured_stock_flex"> 
@@ -63,6 +76,7 @@ export default function SearchStocks(props) {
                         stock={stock.symbol}
                         handleStockClick={props.handleStockClick}
                         handlePositionClick={props.handlePositionClick}
+                        handleSearchClose={props.handleSearchClose}
                         />
                     </div>
                 </div>        

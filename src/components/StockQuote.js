@@ -40,7 +40,7 @@ export default function StockQuote(props) {
         //Calling API Based on Which of the Featured Stocks they Selected
 
         //LOGO DATA
-        let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/logo?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/logo?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             setLogoData({
@@ -53,7 +53,7 @@ export default function StockQuote(props) {
 
         //QUOTE DATA
 
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/quote?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             let marketCap = res.data.marketCap
@@ -80,7 +80,7 @@ export default function StockQuote(props) {
 
 
         //DIVIDEND DATA
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/dividends?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/dividends?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             if (res.data[0] === undefined){
@@ -104,7 +104,7 @@ export default function StockQuote(props) {
         })
 
         //News Articles (In English)
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{100}?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{100}?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             let english_array = res.data.filter(article => article.lang === 'en').slice(0, 5)
@@ -180,7 +180,7 @@ export default function StockQuote(props) {
                         
                     </div>
                 </div>
-                <h1 className="in_the_news">{props.selectedStock} in the News</h1>
+                <h1 className="in_the_news">Latest News for {props.selectedStock}</h1>
                 <div className="articles_container">
                     {newsArray.length !== 0 ? 
                         newsArray.map(article => {

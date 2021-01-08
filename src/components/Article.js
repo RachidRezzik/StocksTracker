@@ -8,7 +8,7 @@ export default function Article(props) {
 
     useEffect(() => {
         //News Articles (In English)
-        let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/news/last/{100}?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/news/last/{100}?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             let article = res.data.filter(article => article.lang === 'en')[0]

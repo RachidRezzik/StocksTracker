@@ -57,16 +57,17 @@
   text-transform: uppercase;
   font-size: 17.5px;
   color: white;
+  cursor: pointer;
 }
 
 
 /* ******************SEARCH************** */
 
-/* .search_container{
-  display: none;
-} */
-
 .search_container{
+  display: none;
+}
+
+.search_container.active{
   position: fixed;
   top: 90px;
   left: 0px;
@@ -392,7 +393,9 @@
 /* ***********************STOCK QUOTE**************** */
 
 .stock_quote{
-  width: 90%;
+  width: 100%;
+  max-width: 950px;
+  padding: 10px 2.5%;
   margin: 10px auto;
   margin-top: 90px;
   min-height: calc(100vh - 90px);
@@ -472,12 +475,20 @@
   display: block;
   padding: 10px;
   width: 100%;
-  border: 1px solid black;
-  background: rgb(53, 52, 52);
+  background: white;
   margin: 7.5px auto;
   border-radius: 2.5px;
   color: white;
   text-decoration: none;
+  box-shadow: 0px 2px 10px lightgrey;
+}
+
+.article_link h2{
+  color:rgb(4, 115, 219);
+}
+
+.article_link h3{
+  color: black;
 }
 
 

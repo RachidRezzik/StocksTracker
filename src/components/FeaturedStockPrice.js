@@ -19,7 +19,7 @@ export default function FeaturedStockPrice(props) {
             setCurrentPosition(false)
         }
 
-        let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/quote?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             setPrice(res.data.latestPrice)
@@ -33,6 +33,7 @@ export default function FeaturedStockPrice(props) {
 
     const handleMoreInfo = (stock) => {
         props.handleStockClick(stock)
+        props.handleSearchClose()
     }
 
     const handleAddPosition = (stock) => {

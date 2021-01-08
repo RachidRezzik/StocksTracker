@@ -4,7 +4,12 @@ import {Link} from 'react-router-dom'
 //Images
 import logo from '../images/RR_finance.JPG'
 
-export default function NavBar() {
+export default function NavBar(props) {
+    
+    const handleSearchClick = () => {
+        props.handleSearchOpen()  
+    }
+
     return (
         <div className="navbar">
             <div className="logo_container">
@@ -14,7 +19,7 @@ export default function NavBar() {
             </div>
             <div className="links_container">
                 <Link to="/">Positions</Link>
-                <Link to="/Stocks">Search Stocks 🔍</Link>
+                <a id="search_stocks_icon" onClick={handleSearchClick}>Search Stocks 🔍</a>
             </div>
         </div>
     )

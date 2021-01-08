@@ -90,7 +90,7 @@ function App() {
   const [searchOpen, setSearchOpen] = useState(false)
 
   const handleSearchOpen = () => {
-    setSearchOpen(true)
+    setSearchOpen(!searchOpen)
   }
 
   const handleSearchClose = () => {
@@ -101,6 +101,7 @@ function App() {
     <div className="App">
       <HashRouter baseline="/">
         <NavBar 
+        searchOpen={searchOpen}
         handleSearchOpen={handleSearchOpen}
         handleSearchClose={handleSearchClose}
         />

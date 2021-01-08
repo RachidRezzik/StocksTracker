@@ -29,7 +29,7 @@ export default function Position(props) {
     //Calculating Position Value and Return Based on User's Number of Shares and Average Share Price
 
     useEffect(() => {
-        let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/quote?token=pk_d6a02730351b4e809a24fbaf29fb5ac1`
+        let url = `https://cloud.iexapis.com/stable/stock/${props.stock}/quote?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             setValue((props.numberShares * res.data.latestPrice).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2}))

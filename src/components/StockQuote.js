@@ -2,6 +2,25 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 export default function StockQuote(props) {
+    //Local Storage For Refresh, Maintaining the Stock User Wanted to View
+    const setSelectedStockStorage = (userPositions) => {
+        localStorage.setItem('selectedStock', JSON.stringify(userPositions))
+    }
+    
+    const readSelectedStockStorage = () => {
+        return JSON.parse(localStorage.getItem('selectedStock'))
+    }
+
+    if (localStorage.getItem('selectedStock') === null){
+        setSelectedStockStorage(props.selectedStock)
+    } else if (props.selectedStock !== ""){
+        setSelectedStockStorage(props.selectedStock)
+    }
+
+    const [selectedStock, setSelectedStock] = useState(props.selectedStock !== "" ? props.selectedStock : readSelectedStockStorage())
+
+
+
     const [logoData, setLogoData] = useState({
         url: ""
     })
@@ -28,10 +47,11 @@ export default function StockQuote(props) {
     const [currentPosition, setCurrentPosition] = useState(false)
     
     useEffect(() => {
+        console.log(selectedStock)
         let user_positions = props.userPositions
         if (user_positions.length === 0){
             setCurrentPosition(false)
-        } else if (user_positions.find(position => position.stock === props.selectedStock)){
+        } else if (user_positions.find(position => position.stock === selectedStock)){
             setCurrentPosition(true)
         } else{
             setCurrentPosition(false)
@@ -40,7 +60,7 @@ export default function StockQuote(props) {
         //Calling API Based on Which of the Featured Stocks they Selected
 
         //LOGO DATA
-        let url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/logo?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
+        let url = `https://cloud.iexapis.com/stable/stock/${selectedStock}/logo?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             setLogoData({
@@ -53,7 +73,7 @@ export default function StockQuote(props) {
 
         //QUOTE DATA
 
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/quote?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
+        url = `https://cloud.iexapis.com/stable/stock/${selectedStock}/quote?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             let marketCap = res.data.marketCap
@@ -80,7 +100,7 @@ export default function StockQuote(props) {
 
 
         //DIVIDEND DATA
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/dividends?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
+        url = `https://cloud.iexapis.com/stable/stock/${selectedStock}/dividends?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             if (res.data[0] === undefined){
@@ -104,7 +124,7 @@ export default function StockQuote(props) {
         })
 
         //News Articles (In English)
-        url = `https://cloud.iexapis.com/stable/stock/${props.selectedStock}/news/last/{100}?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
+        url = `https://cloud.iexapis.com/stable/stock/${selectedStock}/news/last/{100}?token=sk_3e722d9cee6c4ae498d5e8ad9f543015`
         axios.get(url)
         .then((res) => {
             let english_array = res.data.filter(article => article.lang === 'en').slice(0, 5)
@@ -115,7 +135,7 @@ export default function StockQuote(props) {
         })
 
         setLoading(false)
-    }, [props.selectedStock, props.userPositions])
+    }, [selectedStock, props.userPositions])
 
     const handleAddPosition = (stock) => {
         props.handlePositionClick(stock)
@@ -132,15 +152,15 @@ export default function StockQuote(props) {
                     <div className="name_logo">
                         <img style={{border: "1px solid lightgray"}} src={logoData.url} alt=""/>
                         <div>
-                            <p>{props.selectedStock}</p>
+                            <p>{selectedStock}</p>
                             <h2>{quoteData.companyName}</h2>
                         </div>
                     </div>
                     <div>
-                        <button onClick={() => handleAddPosition(props.selectedStock)}>{currentPosition ? "Edit Position" : "Add Position"}</button>
+                        <button onClick={() => handleAddPosition(selectedStock)}>{currentPosition ? "Edit Position" : "Add Position"}</button>
                     </div>
                 </div>
-                <h4 id="price">Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : "negative_change"}>({quoteData.changePercent}%)</span></h4> 
+                <h4 id="price">Price: ${quoteData.latestPrice} <span className={quoteData.changePercent > 0 ? "positive_change" : quoteData.changePercent < 0 ?"negative_change" : ""}>({quoteData.changePercent}%)</span></h4> 
                 <div className="quote_data">
                     <div className="metrics_info">
                         <div>
@@ -180,7 +200,7 @@ export default function StockQuote(props) {
                         
                     </div>
                 </div>
-                <h1 className="in_the_news">Latest News for {props.selectedStock}</h1>
+                <h1 className="in_the_news">Latest News for {selectedStock}</h1>
                 <div className="articles_container">
                     {newsArray.length !== 0 ? 
                         newsArray.map(article => {

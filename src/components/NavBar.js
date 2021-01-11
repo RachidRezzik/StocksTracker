@@ -19,7 +19,7 @@ export default function NavBar(props) {
             </div>
             <div className="links_container">
                 <Link to="/">Positions</Link>
-                <a id="search_stocks_icon" onClick={handleSearchClick}>Search Stocks 🔍</a>
+                <a id="search_stocks_icon" onClick={handleSearchClick}>Stocks 🔍</a>
             </div>
         </div>
     )

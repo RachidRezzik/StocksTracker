@@ -97,6 +97,11 @@ function App() {
     setSearchOpen(false)
   }
 
+  //Detecting Page Refresh to ReShuffle the Order of Featured Stocks displayed in the News Section
+  window.onbeforeunload = (e) => {
+    localStorage.removeItem('articles')
+  }
+
   return (
     <div className="App">
       <HashRouter baseline="/">

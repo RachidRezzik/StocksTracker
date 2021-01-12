@@ -56,6 +56,7 @@ export default function SearchStocks(props) {
     return (
         <div ref={node} className={props.searchOpen ? "search_container active" : "search_container"}>    
             <form onSubmit={handleStockSearch}>
+                <span id="search_span">Search Stock:</span>
                 <input id="stock_input" type="text" autoComplete="off" ref={userInput} placeholder="Input Ticker Symbol" />
                 <input id="stock_submit" type="submit" value="Get Quote" />
             </form>

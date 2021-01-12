@@ -40,7 +40,7 @@ export default function News(props) {
             })
         })
         setLoading(false)
-    }, [props.featuredStocks]);
+    }, []);
 
 
     if (isLoading){

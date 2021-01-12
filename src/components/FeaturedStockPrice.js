@@ -38,6 +38,7 @@ export default function FeaturedStockPrice(props) {
 
     const handleAddPosition = (stock) => {
         props.handlePositionClick(stock)
+        props.handleSearchClose()
     }
 
     

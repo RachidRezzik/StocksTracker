@@ -8,6 +8,7 @@ import StockQuote from './components/StockQuote'
 import NavBar from './components/NavBar';
 import AddPositionModal from './components/AddPositionModal';
 import SearchStocks from './components/SearchStocks';
+import Footer from './components/Footer';
 
 function App() {
   const [selectedStock, setSelectedStock] = useState("")
@@ -122,6 +123,7 @@ function App() {
           handleStockClick={handleStockClick}  
           handlePositionClick={handlePositionClick}
           handleRemovePosition={handleRemovePosition}
+          handleSearchClose={handleSearchClose}
           userPositions={userPositions}  
           />} />
           <Route path="/StockQuote" render={() => <StockQuote
@@ -130,6 +132,7 @@ function App() {
           handlePositionClick={handlePositionClick}
           />} />
         </Switch>
+        <Footer />
         <AddPositionModal 
         positionModal={positionModal}  
         positionStock={positionStock}

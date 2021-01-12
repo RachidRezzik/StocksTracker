@@ -28,6 +28,7 @@ export default function FeaturedStocks(props) {
                                     handleStockClick={props.handleStockClick}
                                     handlePositionClick={props.handlePositionClick}
                                     userPositions={props.userPositions}
+                                    handleSearchClose={props.handleSearchClose}
                                     />
                                 </div>
                             </div>

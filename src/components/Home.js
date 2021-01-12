@@ -54,7 +54,7 @@ export default function Home(props) {
                 handleStockClick={props.handleStockClick}
                 handleRemovePosition={props.handleRemovePosition}
                 />
-                <h1>News</h1>
+                <h1 id="news_title">News</h1>
                 <News
                 featuredStocks={featuredStocks.filter(stock => stock.ticker !== "IBM")}
                 />
@@ -65,6 +65,7 @@ export default function Home(props) {
                 handlePositionClick={props.handlePositionClick}
                 userPositions={props.userPositions}
                 featuredStocks={featuredStocks}
+                handleSearchClose={props.handleSearchClose}
                 />
             </div>
         </div>

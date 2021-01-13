@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/StocksTracker/static/css/main.69200574.chunk.css",
+    "main.css": "/StocksTracker/static/css/main.4b285198.chunk.css",
     "main.js": "/StocksTracker/static/js/main.0b2ea8c5.chunk.js",
     "main.js.map": "/StocksTracker/static/js/main.0b2ea8c5.chunk.js.map",
     "runtime-main.js": "/StocksTracker/static/js/runtime-main.0be18cb3.js",
@@ -10,7 +10,7 @@
     "static/js/3.1cf5c609.chunk.js": "/StocksTracker/static/js/3.1cf5c609.chunk.js",
     "static/js/3.1cf5c609.chunk.js.map": "/StocksTracker/static/js/3.1cf5c609.chunk.js.map",
     "index.html": "/StocksTracker/index.html",
-    "static/css/main.69200574.chunk.css.map": "/StocksTracker/static/css/main.69200574.chunk.css.map",
+    "static/css/main.4b285198.chunk.css.map": "/StocksTracker/static/css/main.4b285198.chunk.css.map",
     "static/js/2.d34c84ce.chunk.js.LICENSE.txt": "/StocksTracker/static/js/2.d34c84ce.chunk.js.LICENSE.txt",
     "static/media/RR_finance.54a96920.JPG": "/StocksTracker/static/media/RR_finance.54a96920.JPG",
     "static/media/edit-icon.9ea85f15.svg": "/StocksTracker/static/media/edit-icon.9ea85f15.svg",
@@ -21,7 +21,7 @@
   "entrypoints": [
     "static/js/runtime-main.0be18cb3.js",
     "static/js/2.d34c84ce.chunk.js",
-    "static/css/main.69200574.chunk.css",
+    "static/css/main.4b285198.chunk.css",
     "static/js/main.0b2ea8c5.chunk.js"
   ]
 }
